@@ -1,0 +1,19 @@
+{
+  "name": "qmailstoragescript",
+  "version": "1.0.0",
+  "description": "QMailStorageScript",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "build": "browserify index.js | uglifyjs -c --comments \"/@|UserScript/\" -o dist/bundle.js",
+    "dev": "nodemon --watch index.js --exec pnpm run build",
+    "prepare": "husky install"
+  },
+  "author": "Nzzz964",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "husky": "^8.0.1",
+    "nodemon": "^2.0.16",
+    "uglify-js": "^3.15.4"
+  }
+}
