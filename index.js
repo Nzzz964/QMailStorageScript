@@ -288,26 +288,33 @@
         });
         downloadBtn.addEventListener('click', async function (ev) {
             ev.preventDefault();
-            const contents = mailList.querySelectorAll('.content');
-            const filename = contents[0].childNodes[0].data.trim();
-            const uint8 = [];
-            for (const content of contents) {
-                const progress = content.querySelector('progress');
-                progress.style.display = 'block';
-                const mid = content.dataset.mid;
-                const data = await redirect(mid, {
-                    onprogress: (percent) => {
-                        progress.value = percent;
-                    }
-                });
-                uint8.push(data);
-            }
             closePopupBtn.setAttribute('disabled', '');
+            cleanBtn.setAttribute('disabled', '');
             this.setAttribute('disabled', '');
-            utils.downloadAsBlob(utils.concatenate(...uint8), filename);
-            window.QMScript_Mails = [];
-            renderMailList();
+
+            const contents = mailList.querySelectorAll('.content');
+            do {
+                if (contents.length === 0) break;
+                const filename = contents[0].childNodes[0].data.trim();
+                const uint8 = [];
+                for (const content of contents) {
+                    const progress = content.querySelector('progress');
+                    progress.style.display = 'block';
+                    const mid = content.dataset.mid;
+                    const data = await redirect(mid, {
+                        onprogress: (percent) => {
+                            progress.value = percent;
+                        }
+                    });
+                    uint8.push(data);
+                }
+                utils.downloadAsBlob(utils.concatenate(...uint8), filename);
+                window.QMScript_Mails = [];
+                renderMailList();
+            } while (false);
+
             this.removeAttribute('disabled');
+            cleanBtn.removeAttribute('disabled');
             closePopupBtn.removeAttribute('disabled');
             return false;
         });
