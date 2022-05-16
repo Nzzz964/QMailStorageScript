@@ -107,147 +107,34 @@
         document.querySelector('.topbg')
             ?.insertAdjacentHTML('afterbegin', `<a class="btn_gray" style="position: absolute;top: 39px;right: 300px;" hidefocus="" id="QMScriptShowPopup" href="javascript:;" initlized="true" md="0">打开列表</a>`);
 
-        const popup = `
-        <div id="QMScript_Popup" style="display:none;">
-        <div id="QMScript_Container">
-            <p class="header">文件列表</p>
-            <ul id="QMscript_MailList">
+        const popup =
+            '<div id="QMScript_Popup" style="display:none;">' +
+            '<div id="QMScript_Container">' +
+            '<p class="header">文件列表</p>' +
+            '<ul id="QMscript_MailList">' +
+            '</ul>' +
+            '<div class="footer">' +
+            '<button id="QMscript_Download" type="button">下载</button>' +
+            '<button id="QMscript_Clean" type="button">清空</button>' +
+            '<button id="QMscript_Close" type="button">关闭</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
 
-            </ul>
-            <div class="footer">
-                <button id="QMscript_Download" type="button">下载</button>
-                <button id="QMscript_Clean" type="button">清空</button>
-                <button id="QMscript_Close" type="button">关闭</button>
-            </div>
-        </div>
-    </div>
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #QMScript_Popup {
-            --radius-size: 3px;
-
-            z-index: 999999;
-
-            position: fixed;
-            top: 0;
-            left: 0;
-
-            box-sizing: border-box;
-
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, .3);
-
-            display: flex;
-            flex-direction: column;
-
-            overflow: hidden;
-        }
-
-        #QMScript_Container {
-            margin: auto;
-            border-radius: var(--radius-size);
-            width: 60%;
-            background-color: #fff;
-
-            min-height: 587px;
-            max-height: 800px;
-
-            border: 1px solid #e3e6eb;
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        #QMScript_Container ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-y: scroll;
-        }
-
-        #QMScript_Container .header {
-            position: sticky;
-            background-color: #fff;
-
-            top: 0;
-            margin: 0;
-            padding: 10px;
-            font-size: 25px;
-            color: #003366;
-            text-align: center;
-            font-weight: bold;
-            border-bottom: 1px solid #e3e6eb;
-            border-radius: var(--radius-size) var(--radius-size) 0 0;
-            cursor: auto;
-        }
-
-        #QMScript_Container .content {
-            font-size: 20px;
-
-            background: #fff;
-            padding: 12px 10px;
-            border-bottom: 1px solid #e3e6eb;
-
-            cursor: move;
-            user-select: none;
-            transition: background-color linear .2s;
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-
-            position: relative;
-        }
-
-        #QMScript_Container li .delete {
-            box-sizing: content-box;
-            padding: 0px 5px 0px 5px;
-            color: #f20d0d;
-            margin: auto 30px auto 30px;
-            cursor: pointer;
-        }
-
-        #QMScript_Container li:hover {
-            background-color: #ececec;
-        }
-
-        #QMScript_Container li.over {
-            border: 1px dotted black;
-            box-shadow: inset 0px 0px 10px 1px #dddddd;
-        }
-
-        #QMScript_Container progress {
-            position: absolute;
-            height: 5px;
-            bottom: -3px;
-            left: 0;
-            width: 100%;
-            display: none;
-        }
-
-        #QMScript_Container .footer {
-            border-top: 1px #e3e6eb solid;
-            padding: 15px;
-            display: flex;
-            gap: 30px;
-        }
-
-        #QMScript_Container button {
-            height: 50px;
-            width: 80px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-    </style>
-        `;
+            '<style>' +
+            'html,body {margin: 0; padding: 0; }' +
+            '#QMScript_Popup {--radius-size: 3px; z-index: 999999; position: fixed; top: 0; left: 0; box-sizing: border-box; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, .3); display: flex; flex-direction: column; overflow: hidden; }' +
+            '#QMScript_Container {margin: auto; border-radius: var(--radius-size); width: 60%; background-color: #fff; min-height: 587px; max-height: 800px; border: 1px solid #e3e6eb; display: flex; flex-direction: column; }' +
+            '#QMScript_Container ul {list-style: none; margin: 0; padding: 0; height: 100%; overflow-y: scroll; }' +
+            '#QMScript_Container .header {position: sticky; background-color: #fff; top: 0; margin: 0; padding: 10px; font-size: 25px; color: #003366; text-align: center; font-weight: bold; border-bottom: 1px solid #e3e6eb; border-radius: var(--radius-size) var(--radius-size) 0 0; cursor: auto; }' +
+            '#QMScript_Container .content {font-size: 20px; background: #fff; padding: 12px 10px; border-bottom: 1px solid #e3e6eb; cursor: move; user-select: none; transition: background-color linear .2s; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; position: relative; }' +
+            '#QMScript_Container li .delete {box-sizing: content-box; padding: 0px 5px 0px 5px; color: #f20d0d; margin: auto 30px auto 30px; cursor: pointer; }' +
+            '#QMScript_Container li:hover {background-color: #ececec; }' +
+            '#QMScript_Container li.over {border: 1px dotted black; box-shadow: inset 0px 0px 10px 1px #dddddd; }' +
+            '#QMScript_Container progress {position: absolute; height: 5px; bottom: -3px; left: 0; width: 100%; display: none; }' +
+            '#QMScript_Container .footer {border-top: 1px #e3e6eb solid; padding: 15px; display: flex; gap: 30px; }' +
+            '#QMScript_Container button {height: 50px; width: 80px; font-size: 20px; cursor: pointer;}' +
+            '</style>';
 
         document.body.insertAdjacentHTML('beforeend', popup);
 
@@ -325,15 +212,14 @@
             mailList.innerHTML = '';
 
             const html = mails.reduce((acc, v) => {
-                return acc + `
-            <li draggable="true">
-                <div class="content" data-mid="${v.mid}">
-                ${v.title}
-                <span class="delete">X</span>
-                <progress value="0" max="100">0%</progress>
-                </div>
-            </li>
-            `
+                return acc +
+                    `<li draggable="true">` +
+                    `<div class="content" data-mid="${v.mid}">` +
+                    `${v.title}` +
+                    `<span class="delete">X</span>` +
+                    `<progress value="0" max="100">0%</progress>` +
+                    `</div>` +
+                    `</li>`;
             }, '');
 
             mailList.insertAdjacentHTML('beforeend', html);
